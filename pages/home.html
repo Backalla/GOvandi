@@ -4,7 +4,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>Bootstrap 101 Template</title>
+    <title>Bus Ticket Booking System</title>
 
     <!-- Bootstrap -->
     <link href="pages/css/bootstrap.min.css" rel="stylesheet">
@@ -18,6 +18,13 @@
   </head>
   <body>
     <div class="container">
+      <div class="pull-right">Welcome!
+          {{if .U.Uid}}
+            <strong>{{.U.Name}}</strong>  <a href="/logout">Logout</a>
+          {{else}}
+            <strong>Guest</strong> <a href="/login">Login</a>
+          {{end}}
+      </div>
       <img src="pages/img/homebanner.gif" width="100%" height="250">
       <h3>Select a Bus</h3>
       <table class="table">
@@ -28,8 +35,9 @@
           <th>Starting</th>
           <th>Destination</th>
           <th>Ticket Price</th>
+          <th></th>
         </tr>
-        {{range $index,$val := .}}
+        {{range $index,$val := .Buses}}
         <tr>
           <td>{{$index}}</td>
           <td>{{.Id}}</td>
@@ -37,13 +45,14 @@
           <td>{{.Source}}</td>
           <td>{{.Destination}}</td>
           <td>{{.Price}}</td>
+          <td><button type="button" class="btn btn-success">Check Availability</button></td>
         </tr>
         {{end}}
       </table>
     </div> 
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="pages/js/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="pages/js/bootstrap.min.js"></script>
   </body>
